@@ -1,0 +1,47 @@
+<>import psycopg2
+from flask import render_template
+from app import app
+
+
+@app.route('/')
+@app.route('/dashboard')
+def index():
+    db = "dbname=printshop user=sprocket password=Sprocket123 host=localhost"
+    conn = psycopg2.connect(db)
+    cur = conn.cursor()
+    cur.execute("""SELECT * FROM paper_stock;""")
+    rows = cur.fetchall()
+    cur.close()
+
+    return render_template('paper.html', results=rows)
+
+@app.route('/paper')
+def paper():
+    return render_template('paper.html')
+
+@app.route('/charts')
+def charts():
+    return render_template('charts.html')
+
+@app.route('/price-calculator')
+def calculator():
+    db = "dbname=printshop user=sprocket password=Sprocket123 host=localhost"
+    conn = psycopg2.connect(db)
+    cur = conn.cursor()
+    try:
+      cur.execute("""SELECT * FROM paper_stock;""")
+      rows = cur.fetchall()
+      cur.close()
+      my_list = []
+      for row in rows:
+        my_list.append(row[1])
+
+      return render_template('price_calc.html', results=my_list)
+
+    except Exception as e:
+      print(e)
+      return []
+
+@app.route('/paper/edit/<name>')
+def edit():
+    return render_template('charts.html')

@@ -1,0 +1,71 @@
+{% extends "left_sidebar.html" %}
+{% block main_container %}
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-12 d-flex no-block align-items-center">
+                        <h4 class="page-title">Current Hourly Cost : £{{'%0.2f'|format(costs.0/220|float) }} </h4>
+                        <div class="ms-auto text-end">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Library</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-12">
+                       {{ paper }}
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Running Costs</h5>
+                                <div class="table-responsive">
+                                    <table id="zero_config" class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Item</th>
+                                                <th>Description</th>
+                                                <th>Cost</th>
+                                                <th>Edit</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for item in results %}
+                                            <tr>
+                                               <td>{{ item.0 }}</td>
+                                               <td>{{ item.1 }}</td>
+                                               <td>{{ item.2 }}</td>
+                                               <td><a href="/costs/edit/{{ item.1 }}">Edit</a></td>
+                                            </tr>
+                                            {% endfor %} 
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                                <div class="card-body">
+                                <a href="/costs/add"><button type="button" class="btn btn-primary">Add Cost</button></a>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+{% endblock %}
+

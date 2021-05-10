@@ -1,0 +1,130 @@
+{% extends "left_sidebar.html" %}
+{% block main_container %}
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-12 d-flex no-block align-items-center">
+                        <h4 class="page-title">Paper Stock</h4>
+                        <div class="ms-auto text-end">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Library</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                            <form class="form-horizontal" action="/paper/add" method=post>
+                                <div class="card-body">
+                                    <h4 class="card-title">Add New Paper Stock</h4>
+                                    <div class="form-group row">
+                                        <label for="fname"
+                                            class="col-sm-3 text-end control-label col-form-label">Paper Code</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" name="paperCode"
+                                                placeholder="Paper Code">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="lname" class="col-sm-3 text-end control-label col-form-label">Paper Name</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" name="paperName"
+                                                placeholder="Paper Name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="lname"
+                                            class="col-sm-3 text-end control-label col-form-label">Product Name</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" name="paperProductName"
+                                                placeholder="Product Name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="email1"
+                                            class="col-sm-3 text-end control-label col-form-label">Paper Brand</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" name="paperBrand"
+                                                placeholder="Paper Brand">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="cono1"
+                                            class="col-sm-3 text-end control-label col-form-label">Colour</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" name="paperColour"
+                                                placeholder="Paper Colour">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="cono1"
+                                            class="col-sm-3 text-end control-label col-form-label">Weight</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" name="paperWeight"
+                                                placeholder="Paper Weight (gsm)">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="cono1"
+                                            class="col-sm-3 text-end control-label col-form-label">Size</label>
+                                        <div class="col-sm-9">
+                                            <select name=paperSize class="select2 form-select shadow-none" style="width: 100%; height:36px;">
+                                            <option>Select</option>
+                                                <option value="SRA1">SRA1</option>
+                                                <option value="SRA1">SRA2</option>
+                                                <option value="SRA1">SRA3</option>
+                                                <option value="A4">A4</option>
+                                        </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="cono1"
+                                            class="col-sm-3 text-end control-label col-form-label">Quantity</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" name="paperQuantity"
+                                                placeholder="QTY">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="cono1"
+                                            class="col-sm-3 text-end control-label col-form-label">Cost</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" name="paperCost"
+                                                placeholder="Cost (£)">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="border-top">
+                                    <div class="card-body">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+{% endblock %}
+

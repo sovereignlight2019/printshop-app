@@ -1,0 +1,121 @@
+{% extends "left_sidebar.html" %}
+{% block main_container %}        
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-12 d-flex no-block align-items-center">
+                        <h4 class="page-title">Form Wizard</h4>
+                        <div class="ms-auto text-end">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Library</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="card">
+                    <div class="card-body wizard-content">
+                        <h4 class="card-title">Price Calculator</h4>
+                        <h6 class="card-subtitle"></h6>
+                        <form id="example-form" action="/price-calculator" method=POST class="mt-5">
+                            <div>
+                                <h3>Paper Options</h3>
+                                <section>
+                                    <label class="col-md-3 mt-3">Paper Type</label>
+                                        <select name=paperType class="select2 form-select shadow-none" style="width: 100%; height:36px;">
+                                            <option>Select</option>
+                                            {% for paper in results %}
+                                                <option value="{{ paper }}">{{ paper }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    <label for="userName">Print Size*</label>
+                                        <select name=paperSize class="select2 form-select shadow-none" style="width: 100%; height:36px;">
+                                            <option value="SRA3">SRA3</option>
+                                            <option value="A0">A0</option>
+                                            <option value="A1">A1</option>
+                                            <option value="A2">A2</option>
+                                            <option value="A4">A4</option>
+                                        </select>
+                                    <label for="finishSize">Finish Size *</label>
+                                        <select name=paperFinishSize class="select2 form-select shadow-none" style="width: 100%; height:36px;">
+                                            <option value="A0">A0</option>
+                                            <option value="A1">A1</option>
+                                            <option value="A2">A2</option>
+                                            <option value="A3">A3</option>
+                                            <option value="A4">A4</option>
+                                            <option value="A5">A5</option>
+                                            <option value="A6">A6</option>
+                                            <option value="BC8">8Up Business Cards</option>
+                                            <option value="BC10">10Up Business Cards</option>
+                                        </select>
+                                    <label for="quantity">Quantity *</label>
+                                    <input id="quantity" name="quantity" type="text" class="required form-control">
+                                    <p>(*) Mandatory</p>
+                                </section>
+                                <h3>Print Options</h3>
+                                <section>
+                                    <label for="printColour">Print Colour *</label>
+                                        <select name=printColour class="select2 form-select shadow-none" style="width: 100%; height:36px;">
+                                            <option value="colour">Colour</option>
+                                            <option value="black_white">Black & White</option>
+                                        </select>
+                                    <label for="printDuplex">Single / Double Sided *</label>
+                                        <select name=printDuplex class="select2 form-select shadow-none" style="width: 100%; height:36px;">
+                                            <option value="single">Single Sided</option>
+                                            <option value="double">Double Sided</option>
+                                        </select>
+                                    <label for="numbering">Numbering *</label>
+                                        <select name=numbering class="select2 form-select shadow-none" style="width: 100%; height:36px;">
+                                            <option value="no">No</option>
+                                            <option value="yes">Yes</option>
+                                        </select>
+                                    <p>(*) Mandatory</p>
+                                </section>
+                                <h3>Finish Options</h3>
+                                <section>
+                                    <label for="laminating">Laminating *</label>
+                                        <select name=laminating class="select2 form-select shadow-none" style="width: 100%; height:36px;">
+                                            <option value="no">No</option>
+                                            <option value="single">Single Side</option>
+                                            <option value="double">Double Side</option>
+                                        </select>
+                                    <label for="foiling">Foiling *</label>
+                                        <select name=foiling class="select2 form-select shadow-none" style="width: 100%; height:36px;">
+                                            <option value="no">No</option>
+                                            <option value="yes">Yes</option>
+                                        </select>
+                                    <label for="folding">Folding *</label>
+                                        <select name=foiling class="select2 form-select shadow-none" style="width: 100%; height:36px;">
+                                            <option value="no">No</option>
+                                            <option value="yes">Yes</option>
+                                        </select>
+                                </section>
+                                <h3>Design Effort</h3>
+                                <section>
+                                    <label for="design">Design Hours</label>
+                                    <input id="designHours" name="designHours" type="text" value=0>
+                                </section>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+{% endblock %}
