@@ -1,0 +1,123 @@
+{% extends "left_sidebar.html" %}
+{% block main_container %}
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-12 d-flex no-block align-items-center">
+                        <h4 class="page-title">Paper Stock</h4>
+                        <div class="ms-auto text-end">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Library</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                            <form class="form-horizontal" action="/paper/add" method=post>
+                                <div class="card-body">
+                                    <h4 class="card-title">Paper Stock</h4>
+                                    <div class="form-group row">
+                                        <label for="fname"
+                                            class="col-sm-3 text-end control-label col-form-label">Paper Code</label>
+                                        <div class="col-sm-9">
+                                           <input type="text" class="form-control" name="paperCode" value="{{ paper.0 }}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="lname" class="col-sm-3 text-end control-label col-form-label">Paper Name</label>
+                                        <div class="col-sm-9">
+                                           <input type="text" class="form-control" name="paperName" value="{{ paper.1 }}" disabled="disabled">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="lname"
+                                            class="col-sm-3 text-end control-label col-form-label">Product Name</label>
+                                        <div class="col-sm-9">
+                                           <input type="text" class="form-control" name="paperProductName" value="{{ paper.2 }}"> 
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="email1"
+                                            class="col-sm-3 text-end control-label col-form-label">Paper Brand</label>
+                                        <div class="col-sm-9">
+                                           <input type="text" class="form-control" name="paperBrand" value="{{ paper.3 }}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="cono1"
+                                            class="col-sm-3 text-end control-label col-form-label">Colour</label>
+                                        <div class="col-sm-9">
+                                           <input type="text" class="form-control" name="paperColour" value="{{ paper.4 }}" disabled="disabled">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="cono1"
+                                            class="col-sm-3 text-end control-label col-form-label">Weight</label>
+                                        <div class="col-sm-9">
+                                           <input type="text" class="form-control" name="paperWeight" value="{{ paper.5 }}" disabled="disabled"> 
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="cono1"
+                                            class="col-sm-3 text-end control-label col-form-label">Size</label>
+                                        <div class="col-sm-9">
+                                            <select name=paperSize class="select2 form-select shadow-none" style="width: 100%; height:36px;" disabled="disabled">
+                                            <option>Select</option>
+                                            <option value="SRA1" {% if paper.6 == "SRA1" %} selected="selected" {% endif %}>SRA1</option>
+                                            <option value="SRA2" {% if paper.6 == "SRA2" %} selected="selected" {% endif %}>SRA2</option>
+                                            <option value="SRA3" {% if paper.6 == "SRA3" %} selected="selected" {% endif %}>SRA3</option>
+                                            <option value="A4" {% if paper.6 == "A4" %} selected="selected" {% endif %}>A4</option>
+                                        </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="cono1"
+                                            class="col-sm-3 text-end control-label col-form-label">Quantity</label>
+                                        <div class="col-sm-9">
+                                           <input type="text" class="form-control" name="paperQuantity" value="{{ paper.7 }}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="cono1"
+                                            class="col-sm-3 text-end control-label col-form-label">Cost</label>
+                                        <div class="col-sm-9">
+                                           <input type="text" class="form-control" name="paperCost" value="{{ paper.8 }}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="border-top">
+                                    <div class="card-body">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                                <input type=hidden value=update name=updatePaper>
+                            </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+{% endblock %}
+
