@@ -152,9 +152,17 @@
             },
             onFinished: function (event, currentIndex) {
                 form.submit();
-                alert("Submitted!");
             }
         });
+    </script>
+    <script>
+       function handleChange(cb) {
+          if ( cb.checked == true ) {
+            document.getElementById('checkNCR').value = "yes";
+          } else {
+            document.getElementById('checkNCR').value = "no";
+          }
+       }
     </script>
     <script>
         //***********************************//

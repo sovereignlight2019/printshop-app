@@ -50,16 +50,29 @@ def calculator():
         quantity = int(request.form['quantity'])
         printDuplex = request.form['printDuplex']
         printColour = request.form['printColour']
-        designHours = int(request.form['designHours'])
+        designHours = float(request.form['designHours'])
         numbering = request.form['numbering']
         markupPercent = 30
-        minimumJobTime = 20
+        ncr = request.form['checkNCR']
+
+        # Minimum Job time hours
+        minimumJobTime = 0.33
 
         markup = 1 + markupPercent / 100
+
+        # General Overheards £ per Hour
         hourlyCost = 10
+
+        # Print Rate £ per Hour
         simplexPrintRate = 4000
         duplexPrintRate = 2000
-        designRate = 20
+
+        # Labour Rate £ per Hour
+        designRate = 30
+        finishRate = 20
+
+        # Number Rate £
+        numberingRate = 3
 
         if printColour == 'colour':
             xeroxCost = 0.05
@@ -116,17 +129,18 @@ def calculator():
             printTime = printCount / simplexPrintRate
             finishTime = printTime
             if finishSize == 'BC8' or finishSize == 'BC10' and finishTime < 0.33:
-                finishTime = 0.33
+                finishTime = minimumJobTime
         else:
             printTime = printCount / duplexPrintRate
             finishTime = printCount / simplexPrintRate
             if finishSize == 'BC8' or finishSize == 'BC10' and finishTime < 0.33:
-                finishTime = 0.33
+                finishTime = minimumJobTime
+
         overheadCost = hourlyCost * printTime + hourlyCost * finishTime 
 
         # Numbering Cost
         if numbering == 'yes':
-            numberingCost = 3
+            numberingCost = numberingRate
         else:
             numberingCost = 0
 
@@ -138,6 +152,19 @@ def calculator():
         # Calculate Laminating Costs
         laminatingCost = 0
 
+        # Calculate Folding / Creasing Laminating Costs
+        laminatingCost = 0
+
+        # 40/min - finishingTime in Hours (multiply by 3 if NCR)
+        if request.form['finishing'] == 'yes':
+            finishingTime = (printCount/40) / 60
+            if ncr == 'yes':
+                finishingCost = finishingTime * finishRate * 4
+            else:
+                finishingCost = finishingTime * finishRate
+        else:
+            finishingCost = 0
+
         # Calculate Design Costs
         designCost = designHours * designRate
 
@@ -145,7 +172,7 @@ def calculator():
         jobCost = overheadCost + paperCost + impressionCost + designCost + numberingCost
         jobPrice = (overheadCost + paperCost + impressionCost + designCost) * markup
 
-        return render_template('price_calc1.html', numbering_Costs=numberingCost,time=totalTime,markup=markupPercent,costs=jobCost, paper_Costs=paperCost, printFinish_Costs=impressionCost, laminating_Costs=laminatingCost, foiling_Costs=foilingCost, overhead_Costs=overheadCost, design_Costs=designCost)
+        return render_template('price_calc1.html', finishCosts=finishingCost,numbering_Costs=numberingCost,time=totalTime,markup=markupPercent,costs=jobCost, paper_Costs=paperCost, printFinish_Costs=impressionCost, laminating_Costs=laminatingCost, foiling_Costs=foilingCost, overhead_Costs=overheadCost, design_Costs=designCost)
 
 @app.route('/paper/edit/<name>')
 def editPaper(name):
