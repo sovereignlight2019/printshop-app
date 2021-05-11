@@ -54,6 +54,28 @@ def calculator():
         numbering = request.form['numbering']
         markupPercent = 30
         ncr = request.form['checkNCR']
+        lamination = request.form['laminating']
+
+        # Laminating Prices
+        encapsulationCost = 32.07
+        laminateMattCost = 130.67
+        laminateGlossCost = 113.18
+        laminateSoftCost = 219.99
+
+        laminateEncapsCount = {
+                'A1' : 25,
+                'A2' : 37,
+                'SRA3' : 75,
+                'A3' : 75,
+                'A4' : 110
+                }
+        laminateCount = {
+                'A1' : 1,
+                'A2' : 2000,
+                'SRA3' : 3000,
+                'A3' : 3000,
+                'A4' : 4000
+                }
 
         # Minimum Job time hours
         minimumJobTime = 0.33
@@ -101,6 +123,8 @@ def calculator():
             factor = 0.125
         elif paperSize == 'A4' and finishSize == 'BC10':
             factor = 0.1
+        else:
+            factor = 1
 
         printCount = round((quantity * factor) + 0.5)
 
@@ -151,9 +175,22 @@ def calculator():
 
         # Calculate Laminating Costs
         laminatingCost = 0
+        if lamination == 'singleMatt':
+            laminatingCost = printCount * (laminateMattCost/laminateCount[paperSize])
+        elif lamination == 'doubleMatt':
+            laminatingCost = printCount * (laminateMattCost/laminateCount[paperSize]) * 2
+        elif lamination == 'singleGloss':
+            laminatingCost = printCount * (laminateGlossCost/laminateCount[paperSize])
+        elif lamination == 'doubleGloss':
+            laminatingCost = printCount * (laminateGlossCost/laminateCount[paperSize]) * 2
+        elif lamination == 'singleSoft':
+            laminatingCost = printCount * (laminateSoftCost/laminateCount[paperSize])
+        elif lamination == 'doubleSoft':
+            laminatingCost = printCount * (laminateSoftCost/laminateCount[paperSize]) * 2
+        elif lamination == 'encapsulate':
+            laminatingCost = printCount * (encapsulationCost/laminateEncapsCount[paperSize])
 
         # Calculate Folding / Creasing Laminating Costs
-        laminatingCost = 0
 
         # 40/min - finishingTime in Hours (multiply by 3 if NCR)
         if request.form['finishing'] == 'yes':
@@ -169,7 +206,7 @@ def calculator():
         designCost = designHours * designRate
 
         # Determine Final Price
-        jobCost = overheadCost + paperCost + impressionCost + designCost + numberingCost
+        jobCost = overheadCost + paperCost + impressionCost + designCost + numberingCost + laminatingCost + foilingCost
         jobPrice = (overheadCost + paperCost + impressionCost + designCost) * markup
 
         return render_template('price_calc1.html', finishCosts=finishingCost,numbering_Costs=numberingCost,time=totalTime,markup=markupPercent,costs=jobCost, paper_Costs=paperCost, printFinish_Costs=impressionCost, laminating_Costs=laminatingCost, foiling_Costs=foilingCost, overhead_Costs=overheadCost, design_Costs=designCost)
