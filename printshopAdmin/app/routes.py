@@ -102,7 +102,7 @@ def calculator():
         elif paperSize == 'A4' and finishSize == 'BC10':
             factor = 0.1
 
-        printCount = round((quantity * factor) + 0.5)
+        printCount = round((quantity * factor * 1.05) + 0.5)
 
         # Get Paper Cost 
         my_list = []
@@ -172,7 +172,7 @@ def calculator():
         jobCost = overheadCost + paperCost + impressionCost + designCost + numberingCost
         jobPrice = (overheadCost + paperCost + impressionCost + designCost) * markup
 
-        return render_template('price_calc1.html', finishCosts=finishingCost,numbering_Costs=numberingCost,time=totalTime,markup=markupPercent,costs=jobCost, paper_Costs=paperCost, printFinish_Costs=impressionCost, laminating_Costs=laminatingCost, foiling_Costs=foilingCost, overhead_Costs=overheadCost, design_Costs=designCost)
+        return render_template('price_calc1.html', printCount=printCount,finishCosts=finishingCost,numbering_Costs=numberingCost,time=totalTime,markup=markupPercent,costs=jobCost, paper_Costs=paperCost, printFinish_Costs=impressionCost, laminating_Costs=laminatingCost, foiling_Costs=foilingCost, overhead_Costs=overheadCost, design_Costs=designCost)
 
 @app.route('/paper/edit/<name>')
 def editPaper(name):
