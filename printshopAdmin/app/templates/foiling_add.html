@@ -1,0 +1,118 @@
+{% extends "left_sidebar.html" %}
+{% block main_container %}
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-12 d-flex no-block align-items-center">
+                        <h4 class="page-title">Foiling Stock</h4>
+                        <div class="ms-auto text-end">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Library</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                            <form class="form-horizontal" action="/foiling/add" method=post>
+                                <div class="card-body">
+                                    <h4 class="card-title">Add New Foiling Stock</h4>
+                                    <div class="form-group row">
+                                        <label for="fname"
+                                            class="col-sm-3 text-end control-label col-form-label">Foiling Code</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" name="foilingCode"
+                                                placeholder="Foiling Code">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="lname" class="col-sm-3 text-end control-label col-form-label">Foiling Brand</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" name="foilingBrand"
+                                                placeholder="Foiling Brand">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="lname"
+                                            class="col-sm-3 text-end control-label col-form-label">Product Type</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" name="foilingType"
+                                                placeholder="Product Type">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="email1"
+                                            class="col-sm-3 text-end control-label col-form-label">Foiling Size</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" name="foilingSize"
+                                                placeholder="Foiling Size">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="cono1"
+                                            class="col-sm-3 text-end control-label col-form-label">Weight</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" name="foilingWeight"
+                                                placeholder="Foiling Weight">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="cono1"
+                                            class="col-sm-3 text-end control-label col-form-label">Colour</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" name="foilingColour"
+                                                placeholder="Foiling Colour">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="cono1"
+                                            class="col-sm-3 text-end control-label col-form-label">Quantity</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" name="foilingQuantity"
+                                                placeholder="QTY">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="cono1"
+                                            class="col-sm-3 text-end control-label col-form-label">Cost</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" name="foilingCost"
+                                                placeholder="Cost (£)">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="border-top">
+                                    <div class="card-body">
+                                       <input type=hidden name=updateFoiling value=add>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+{% endblock %}
+
