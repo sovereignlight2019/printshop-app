@@ -120,6 +120,10 @@ def calculator():
             factor = 0.125
         elif paperSize == 'A4' and finishSize == 'BC10':
             factor = 0.1
+        elif paperSize == 'A4' and finishSize == 'BCSQ':
+            factor = 0.05
+        elif finishSize == 'CORNERS':
+            factor = 0.02
         else:
             factor = 1
 
@@ -148,14 +152,16 @@ def calculator():
         # Calculate Overheads Cost
         if printDuplex == 'single':
             printTime = printCount / simplexPrintRate
-            finishTime = printTime
-            if finishSize == 'BC8' or finishSize == 'BC10' and finishTime < 0.33:
-                finishTime = minimumJobTime
         else:
             printTime = printCount / duplexPrintRate
-            finishTime = printCount / simplexPrintRate
-            if finishSize == 'BC8' or finishSize == 'BC10' and finishTime < 0.33:
-                finishTime = minimumJobTime
+
+        if finishSize == 'BC8' or 'BC10' or 'BCSQ':
+            finishTime = printTime * 3
+        else:
+            finishTime = printTime * 1.25
+
+        if finishSize == 'BC8' or finishSize == 'BC10' or finishSize == 'BCSQ' and finishTime < 0.33:
+            finishTime = minimumJobTime
 
         overheadCost = hourlyCost * printTime + hourlyCost * finishTime 
 
@@ -189,9 +195,18 @@ def calculator():
 
         # Calculate Folding / Creasing Laminating Costs
 
-        # 40/min - finishingTime in Hours (multiply by 3 if NCR)
+        # 40/min - finishingTime in Hours (multiply by 4 if NCR)
         if request.form['finishing'] == 'yes':
-            finishingTime = (printCount/40) / 60
+            if 'BC' in finishSize:
+                if quantity < 100:
+                    finishingTime = 0.33 * (quantity/100)
+                elif quantity > 100 < 500 :
+                    finishingTime = 0.25 * (quantity/100)
+            elif 'CORNERS' in finishSize:
+                finishingTime = 0.33 * (quantity/300)
+            else:
+                finishingTime = (printCount/40) / 60
+
             if ncr == 'yes':
                 finishingCost = finishingTime * finishRate * 4
             else:
@@ -203,7 +218,7 @@ def calculator():
         designCost = designHours * designRate
 
         # Determine Final Price
-        jobCost = overheadCost + paperCost + impressionCost + designCost + numberingCost + laminatingCost + foilingCost
+        jobCost = overheadCost + paperCost + impressionCost + designCost + numberingCost + laminatingCost + foilingCost + finishingCost
         jobPrice = (overheadCost + paperCost + impressionCost + designCost) * markup
 
         return render_template('price_calc1.html', printCount=printCount,finishCosts=finishingCost,numbering_Costs=numberingCost,time=totalTime,markup=markupPercent,costs=jobCost, paper_Costs=paperCost, printFinish_Costs=impressionCost, laminating_Costs=laminatingCost, foiling_Costs=foilingCost, overhead_Costs=overheadCost, design_Costs=designCost)
