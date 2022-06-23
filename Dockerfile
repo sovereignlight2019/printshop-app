@@ -12,5 +12,6 @@ expose 8000
 
 ENV FLASK_APP=app
 ENV FLASK_RUN_PORT=8000
+ENV FLASK_DEBUG=1
 
 CMD cd app && flask run -h localhost -p 8000
