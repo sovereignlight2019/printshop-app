@@ -28,7 +28,7 @@ def numbering():
       num = startNumber + pages
 
       # Place file in html/files directory
-      filename = '/var/www/html/files/' + fileName + '.txt'
+      filename = '/opt/app-root/src/app/static/files/' + fileName + '.txt'
       filename1 = fileName + '.txt'
 
       f = open(filename,"w+")
