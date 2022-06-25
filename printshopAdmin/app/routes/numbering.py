@@ -40,8 +40,10 @@ def numbering():
       # Put file numbering data in the file
       for i in range(startNumber, num):
           while(i<=endNumber):
-              line = str(i)
+              #line = str(i)
+              line = str(i).zfill(4)
               f.write("%s," % (line))
+              #f.write("%02d," % ((line))
               i+= pages
           f.write("\r\n")
 
